@@ -10,7 +10,7 @@ import './login.css';
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [open, setOpen] = React.useState(false);
-    const { loginUser, loading, user, authError } = useAuth();
+    const { loginUser, loading, user, signInWithGoogle, authError } = useAuth();
 
     const location = useLocation();
     const history = useHistory();
@@ -22,6 +22,12 @@ const Login = () => {
         setOpen(true);
         reset()
     };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history);
+        setOpen(true);
+    }
+
     // confirmation alert 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -35,7 +41,7 @@ const Login = () => {
     return (
         <>
             <Navigation></Navigation>
-            <div className="container">
+            <div className="container my-5">
                 <div className="row align-items-center">
                     <div className="col-md-6">
                         <div className='py-5 shadow rounded'>
@@ -63,7 +69,7 @@ const Login = () => {
                                 {errors.password && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This password field is required</span>}
 
                                 <Button style={{ width: '80%' }}
-                                    className='my-4 d-flex mx-auto'
+                                    className='mt-4 mb-2 d-flex mx-auto'
                                     variant='contained'
                                     type="submit"
                                 >Login</Button>
@@ -73,6 +79,11 @@ const Login = () => {
                             {loading && <div style={{ width: "70px", height: '70px' }} class="spinner-border d-flex mx-auto text-secondary" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>}
+                            <div className='d-flex justify-content-center fw-bold my-2'>------------------------Or------------------------</div>
+                            <div className='d-flex justify-content-around py-2'>
+                                <Button onClick={handleGoogleSignIn} variant='contained'>Google Sing In</Button>
+                                <Button variant='contained'>Github Sing IN</Button>
+                            </div>
                             {/* confirm user login notification add here */}
                             {user?.email &&
                                 <Snackbar style={{ color: 'white' }} open={open} autoHideDuration={6000} onClose={handleClose}>
