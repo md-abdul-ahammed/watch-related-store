@@ -16,6 +16,7 @@ const ProductBuy = () => {
     const handleBuyNow = () => {
         product.login_user = user.email;
         product.status = "pending";
+        delete product._id
 
         fetch('http://localhost:5000/order', {
             method: "POST",

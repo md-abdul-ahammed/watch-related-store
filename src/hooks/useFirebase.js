@@ -10,6 +10,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const auth = getAuth();
     const [loading, setLoading] = useState(true);
+    const [admin, setAdmin] = useState(false);
     const [authError, setAuthError] = useState('');
 
     //google provide
@@ -22,7 +23,12 @@ const useFirebase = () => {
             .then((userCredential) => {
 
                 const newUser = { email, displayName: name }
-                setUser(newUser)
+                setUser(newUser);
+
+                //send user details in database
+
+                saveUser(email, name, "POST")
+
                 // send name to firebase after creation
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -76,12 +82,24 @@ const useFirebase = () => {
             })
             .finally(() => setLoading(false));
     }
+    //Figure out admin validation;
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
+
+
 
     //for sign in using google 
     const signInWithGoogle = (location, history) => {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
+
+                saveUser(result.user.email, result.user.displayName, "PUT")
+
                 const destination = location?.state?.from || '/';
                 setTimeout(function () {
                     history.push(destination)
@@ -118,6 +136,17 @@ const useFirebase = () => {
             })
             .finally(() => setLoading(false));
     }
+    //send user information in database
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName }
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+    }
 
 
 
@@ -125,6 +154,7 @@ const useFirebase = () => {
         user,
         registerUser,
         loginUser,
+        admin,
         loading,
         signInWithGoogle,
         authError,

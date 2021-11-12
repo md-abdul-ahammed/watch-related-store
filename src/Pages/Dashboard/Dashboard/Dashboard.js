@@ -6,22 +6,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Navigation from '../../Shared/Navigation/Navigation';
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     Link,
-    useParams,
     useRouteMatch
 } from "react-router-dom";
 import { Button } from '@mui/material';
@@ -32,20 +24,17 @@ import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 import Review from '../Review/Review';
 import AddAProduct from '../AddAProduct/AddAProduct';
 import ManageProducts from '../ManageProducts/ManageProducts';
-import SvgIcon from '@mui/material/SvgIcon';
+import useAuth from '../../../hooks/useAuth';
+import './Dashboard.css';
+import AdminRoute from '../../Login/Login/AdminRoute/AdminRoute';
+
 
 const drawerWidth = 240;
 
-function HomeIcon(props) {
-    return (
-        <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </SvgIcon>
-    );
-}
 
 function Dashboard(props) {
     const { window } = props;
+    const { admin, logout } = useAuth();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const { path, url } = useRouteMatch();
 
@@ -57,37 +46,36 @@ function Dashboard(props) {
         <div>
             <Toolbar />
             <Divider />
-            <Link className='d-block' to={`${url}/pay`}>
-                <Button className='d-flex justify-content-center' variant='containe'><HomeIcon style={{ color: "black" }} sx={{ mr: 2 }} />Pay</Button>
+            <Link style={{ textDecoration: "none" }} className='d-block hover' to={`${url}/myOrders`}>
+                My Orders
             </Link>
-            <Link className='d-block' to={`${url}/makeAdmin`}>
-                <Button className='d-flex justify-content-center' variant='containe'>Make Admin</Button>
+            <Link style={{ textDecoration: "none" }} className='d-block' to={`${url}/pay`}>
+                Pay
             </Link>
-            <Link className='d-block' to={`${url}/manageAllOrders`}>
-                <Button className='d-flex justify-content-center' variant='containe'>Manage All Orders</Button>
+            <Link style={{ textDecoration: "none" }} className='d-block' to={`${url}/review`}>
+                Review
             </Link>
-            <Link className='d-block' to={`${url}/myOrders`}>
-                <Button className='d-flex justify-content-center' variant='containe'>My Orders</Button>
+            <Link style={{ textDecoration: "none" }} to='/login' onClick={logout} className='d-block'>
+                Logout
             </Link>
-            <Link className='d-block' to={`${url}/review`}>
-                <Button className='d-flex justify-content-center' variant='containe'>Review</Button>
-            </Link>
-            <Link className='d-block' to={`${url}/addAProducts`}>
-                <Button className='d-flex justify-content-center' variant='containe'> Add A Product</Button>
-            </Link>
-            <Link className='d-block' to={`${url}/manageProducts`}>
-                <Button className='d-flex justify-content-center' variant='containe'>Manage Products</Button>
-            </Link>
-            <List>
-                {['Home', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
+
+            {
+                admin &&
+                <Box>
+                    <Link className='d-block' to={`${url}/makeAdmin`}>
+                        <Button className='d-flex justify-content-center' >Make Admin</Button>
+                    </Link>
+                    <Link className='d-block' to={`${url}/manageAllOrders`}>
+                        <Button className='d-flex justify-content-center' >Manage All Orders</Button>
+                    </Link>
+                    <Link className='d-block' to={`${url}/addAProducts`}>
+                        <Button className='d-flex justify-content-center' > Add A Product</Button>
+                    </Link>
+                    <Link className='d-block' to={`${url}/manageProducts`}>
+                        <Button className='d-flex justify-content-center' >Manage Products</Button>
+                    </Link>
+                </Box>
+            }
         </div>
     );
 
@@ -161,27 +149,27 @@ function Dashboard(props) {
                         <Route exact path={path}>
                             <MyOrders></MyOrders>
                         </Route>
-                        <Route path={`${path}/makeAdmin`}>
+                        <AdminRoute path={`${path}/makeAdmin`}>
                             <MakeAdmin></MakeAdmin>
-                        </Route>
+                        </AdminRoute>
                         <Route path={`${path}/pay`}>
                             <Pay></Pay>
                         </Route>
-                        <Route path={`${path}/manageAllOrders`}>
+                        <AdminRoute path={`${path}/manageAllOrders`}>
                             <ManageAllOrders></ManageAllOrders>
-                        </Route>
+                        </AdminRoute>
                         <Route path={`${path}/myOrders`}>
                             <MyOrders></MyOrders>
                         </Route>
                         <Route path={`${path}/review`}>
                             <Review></Review>
                         </Route>
-                        <Route path={`${path}/addAProducts`}>
+                        <AdminRoute path={`${path}/addAProducts`}>
                             <AddAProduct></AddAProduct>
-                        </Route>
-                        <Route path={`${path}/manageProducts`}>
+                        </AdminRoute>
+                        <AdminRoute path={`${path}/manageProducts`}>
                             <ManageProducts></ManageProducts>
-                        </Route>
+                        </AdminRoute>
                     </Switch>
                 </Box>
             </Box>
