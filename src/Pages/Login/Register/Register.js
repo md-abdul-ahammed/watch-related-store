@@ -18,6 +18,7 @@ const Register = () => {
     const onSubmit = data => {
         if (data.password !== data.password2) {
             setError("Your Password Did Not Matched");
+            setOpen(true);
             return;
         }
         registerUser(data.email, data.password, location, history, data.name);
@@ -57,6 +58,7 @@ const Register = () => {
                                     id="outlined-basic"
                                     variant="outlined"
                                     label="Name"
+                                    error={errors.name}
                                 />
                                 {errors.name && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This name field is required</span>}
                                 <TextField
@@ -67,6 +69,7 @@ const Register = () => {
                                     variant="outlined"
                                     label="Email"
                                     type="email"
+                                    error={errors.email}
                                 />
                                 {errors.email && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This email field is required</span>}
                                 <TextField
@@ -77,6 +80,7 @@ const Register = () => {
                                     variant="outlined"
                                     label="Password"
                                     type="password"
+                                    error={errors.password}
                                 />
                                 {errors.password && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This password field is required</span>}
                                 <TextField
@@ -87,9 +91,10 @@ const Register = () => {
                                     variant="outlined"
                                     label="Re-enter password"
                                     type="password"
+                                    error={errors.password2}
                                 />
                                 {errors.password2 && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This re-enter password field is required</span>}
-                                {error && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>{error}</span>}
+                                {/* {error && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>{error}</span>} */}
 
                                 <Button style={{ width: '80%' }}
                                     className='mt-4 mb-2 d-flex mx-auto'
@@ -119,6 +124,11 @@ const Register = () => {
                             {authError &&
                                 <Snackbar style={{ color: 'white' }} open={open} autoHideDuration={6000} onClose={handleClose}>
                                     <Alert style={{ backgroundColor: "red", color: 'white' }} severity="error">{authError}</Alert>
+                                </Snackbar>
+                            }
+                            {error &&
+                                <Snackbar style={{ color: 'white' }} open={open} autoHideDuration={4000} onClose={handleClose}>
+                                    <Alert style={{ backgroundColor: "red", color: 'white' }} severity="error">{error}</Alert>
                                 </Snackbar>
                             }
 

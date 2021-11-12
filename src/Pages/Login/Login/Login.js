@@ -55,6 +55,7 @@ const Login = () => {
                                     variant="outlined"
                                     label="Email"
                                     type="email"
+                                    error={errors.email}
                                 />
                                 {errors.email && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This email field is required</span>}
                                 <TextField
@@ -65,6 +66,7 @@ const Login = () => {
                                     variant="outlined"
                                     label="Password"
                                     type="password"
+                                    error={errors.password}
                                 />
                                 {errors.password && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This password field is required</span>}
 

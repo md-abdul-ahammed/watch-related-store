@@ -32,7 +32,7 @@ function App() {
           <PrivateRoute exact path='/productBuy/:id'>
             <ProductBuy></ProductBuy>
           </PrivateRoute>
-          <Route exact path='/dashboard'>
+          <Route path='/dashboard'>
             <Dashboard></Dashboard>
           </Route>
           <Route exact path='/login'>

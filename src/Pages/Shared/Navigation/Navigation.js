@@ -32,7 +32,10 @@ const Navigation = () => {
                     <div className="d-flex">
                         {
                             user.email ?
-                                <Link to='/login' onClick={logout} className="nav-link">Logout</Link>
+                                <>
+                                    <Link to='/dashboard' className="nav-link">Dashboard</Link>
+                                    <Link to='/login' onClick={logout} className="nav-link">Logout</Link>
+                                </>
                                 :
                                 <>
                                     <Link to='/login' className="nav-link">Login</Link>
