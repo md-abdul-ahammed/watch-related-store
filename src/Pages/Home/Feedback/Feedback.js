@@ -11,6 +11,11 @@ const Feedback = () => {
 
     return (
         <div className="my-5">
+            <div className='mb-5'>
+                <h5 className='d-flex justify-content-center c-primary-color fw-bold'>Our Customer Say</h5>
+                <h1 className='d-flex justify-content-center'>What Our Customer Say</h1>
+                <h1 className='d-flex justify-content-center'>About Us</h1>
+            </div>
             <div className={feedbacks.length > 2 ? "row row-cols-1 row-cols-md-3 container-md container-lg mx-auto g-4 px-2" : "row row-cols-1 row-cols-md-2 container-md container-lg mx-auto g-4 px-2"}>
                 {
                     feedbacks.map(feedback =>

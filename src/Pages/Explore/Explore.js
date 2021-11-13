@@ -25,7 +25,7 @@ const Explore = () => {
                                         <p className="card-text">{product.description.slice(0, 70)}</p>
                                     </div>
                                     <div className="card-footer p-0">
-                                        <Link className="nav-link" to={`/productBuy/${product._id}`}><Button variant='contained'>Buy Now</Button></Link>
+                                        <Link className="nav-link" to={`/checkout/${product._id}`}><Button variant='contained'>Buy Now</Button></Link>
                                     </div>
                                 </div>
                             </div>

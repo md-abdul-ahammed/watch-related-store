@@ -9,7 +9,7 @@ import Explore from './Pages/Explore/Explore';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import ContactUs from './Pages/ContactUs/ContactUs';
-import ProductBuy from './Pages/ProductBuy/ProductBuy';
+import Checkout from './Pages/Checkout/Chackout/Checkout';
 import Login from './Pages/Login/Login/Login';
 import Register from './Pages/Login/Register/Register';
 import AuthProvider from './context/AuthProvider/AuthProvider';
@@ -29,8 +29,8 @@ function App() {
           <Route exact path='/explore'>
             <Explore></Explore>
           </Route>
-          <PrivateRoute exact path='/productBuy/:id'>
-            <ProductBuy></ProductBuy>
+          <PrivateRoute exact path='/checkout/:id'>
+            <Checkout></Checkout>
           </PrivateRoute>
           <PrivateRoute path='/dashboard'>
             <Dashboard></Dashboard>

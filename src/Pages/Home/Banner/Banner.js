@@ -13,21 +13,21 @@ const Banner = () => {
                 <div className="carousel-item active">
                     <img src="https://i.ibb.co/m52Vq1G/slider-1-2.jpg" className="d-block w-100" alt="..." />
                     <div className="carousel-caption  ">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+                        <h5>NEW ARRIVALS</h5>
+                        <p>Extra 20% Off</p>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img src="https://i.ibb.co/MVX19cw/slider-2-1.jpg" className="d-block w-100" alt="..." />
                     <div className="carousel-caption  ">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
+                        <h5>EXCLUSIVE COLLECTION</h5>
+                        <p>Extra 20% Off</p>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img src="https://i.ibb.co/4R35WJW/slider-3-1.jpg" className="d-block w-100" alt="..." />
                     <div className="carousel-caption  ">
-                        <h5>Third slide label</h5>
+                        <h5>SPRING COLLECTION</h5>
                         <p>Some representative placeholder content for the third slide.</p>
                     </div>
                 </div>
