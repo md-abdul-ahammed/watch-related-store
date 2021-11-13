@@ -1,6 +1,6 @@
 # Watch Store
 
-Tourism Vacation [**Live Site Link**](https://ahammed-watch-store.netlify.app/).
+Watch store [**Live Site Link**](https://ahammed-watch-store.netlify.app/).
 
 ## Telling about this project:
 * This site made for **Selling niche-products**.
