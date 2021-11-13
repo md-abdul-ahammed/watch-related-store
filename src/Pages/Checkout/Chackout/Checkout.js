@@ -4,40 +4,23 @@ import { useParams } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
+import CheckoutModal from '../CheckoutModal/CheckoutModal';
 
 const Checkout = () => {
     const [product, setProduct] = useState({});
     const { id } = useParams();
-    const [open, setOpen] = React.useState(false);
-    const { user } = useAuth()
+
+
+    const [openCheckout, setOpenCheckout] = React.useState(false);
+    const handleCheckoutOpen = () => setOpenCheckout(true);
+    const handleCheckoutClose = () => setOpenCheckout(false);
+
+
     useEffect(() => {
         fetch(`http://localhost:5000/checkout/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, []);
-
-    const handleBuyNow = () => {
-        setOpen(true);
-        product.login_user = user.email;
-        product.status = "pending";
-        delete product._id
-
-        fetch('http://localhost:5000/order', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(product)
-        })
-    }
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
 
     return (
         <>
@@ -61,7 +44,8 @@ const Checkout = () => {
                             <small className="text-muted">{product.description}</small>
                             <small className="text-muted d-block mt-3 fw-bold">{product.stock} in stock</small>
                             <div className='my-3'>
-                                <button className='button-design' onClick={handleBuyNow}>Buy Now</button>
+                                <button onClick={handleCheckoutOpen} className='button-design'>Buy Now</button>
+                                {/* <button className='button-design' onClick={handleBuyNow}>Buy Now</button> */}
                             </div>
                             <hr className='my-4' />
                             <small className='d-block my-2'><span className='text-muted'>SKU:</span> {product.sku}</small>
@@ -69,6 +53,12 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
+                <CheckoutModal
+                    product={product}
+                    handleCheckoutClose={handleCheckoutClose}
+                    openCheckout={openCheckout}
+                >
+                </CheckoutModal>
             </div>
             <hr />
             <Footer></Footer>

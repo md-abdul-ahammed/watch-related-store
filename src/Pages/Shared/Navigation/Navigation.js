@@ -20,15 +20,13 @@ const Navigation = () => {
                         <li className="nav-item">
                             <Link className="nav-link text-white " to="/explore">Explore</Link>
                         </li>
+
                         {/* <li className="nav-item">
-                            <Link className="nav-link" to='/dashboard'>Dashboard</Link>
-                        </li> */}
-                        <li className="nav-item">
                             <Link className="nav-link text-white " to='/aboutUs'>About US</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link text-white " to='/contactUs'>Contact US</Link>
-                        </li>
+                        </li> */}
                     </ul>
                     <div className="d-flex">
                         {

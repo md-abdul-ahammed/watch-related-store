@@ -10,6 +10,7 @@ const Review = () => {
     const [review, setReview] = useState('');
     const { user } = useAuth();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [open, setOpen] = React.useState(false);
 
     const onSubmit = data => {
         data.review = review;
@@ -24,6 +25,14 @@ const Review = () => {
             },
             body: JSON.stringify(data)
         })
+        reset()
+        setOpen(true);
+    };
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
     };
 
 
@@ -31,7 +40,7 @@ const Review = () => {
         size: 50,
         count: 5,
         color: "black",
-        activeColor: "yellow",
+        activeColor: "#fd1d1d",
         value: 7.5,
         a11y: true,
         isHalf: true,
@@ -46,26 +55,35 @@ const Review = () => {
 
     };
     return (
-        <div>
-            <h1>Hey</h1>
-            <ReactStars {...secondExample} />
+        <div className='text-center'>
+            <h1>Please Give Us Your Valuable Feedback</h1>
+            <div className='d-flex justify-content-center'>
+                <ReactStars {...secondExample} />
+            </div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                     style={{ width: '80%' }}
-                    className='mt-4 d-flex mx-auto'
+                    className='mt-4 p-3 d-flex mx-auto  rounded input-focus'
                     {...register("feedback", { required: true })}
                     variant="outlined"
                     label="Email"
+                    rows="4"
+                    placeholder='Write here your feedback about us'
                     type="email"
                 />
-                {errors.email && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This email field is required</span>}
+                {errors.feedback && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This feedback field is required</span>}
 
-                <Button style={{ width: '30%' }}
-                    className='mt-4 mb-2 d-flex mx-auto'
+                <Button
+                    className='px-5 fw-bold button-design d-flex mx-auto my-2'
                     variant='contained'
                     type="submit"
                 >Post</Button>
             </form>
+            <Snackbar style={{ color: 'white' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} style={{ backgroundColor: "green", color: 'white' }} sx={{ width: '100%' }}>
+                    Successfully Added Your Feedback
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

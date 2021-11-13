@@ -52,8 +52,8 @@ const MakeAdmin = () => {
                 />
                 {errors.email && <span style={{ width: '80%' }} className='text-danger d-flex mx-auto'>This email field is required</span>}
 
-                <Button style={{ width: '30%' }}
-                    className='mt-4 mb-2 d-flex mx-auto'
+                <Button
+                    className='mt-4 mb-2 px-5 fw-bold d-flex mx-auto button-design'
                     variant='contained'
                     type="submit"
                 >Make Admin</Button>

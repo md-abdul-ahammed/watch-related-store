@@ -9,7 +9,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Navigation from '../../Shared/Navigation/Navigation';
 import {
     Switch,
     Route,
@@ -25,7 +24,6 @@ import Review from '../Review/Review';
 import AddAProduct from '../AddAProduct/AddAProduct';
 import ManageProducts from '../ManageProducts/ManageProducts';
 import useAuth from '../../../hooks/useAuth';
-import './Dashboard.css';
 import AdminRoute from '../../Login/Login/AdminRoute/AdminRoute';
 
 
@@ -43,36 +41,43 @@ function Dashboard(props) {
     };
 
     const drawer = (
-        <div>
+        <div >
             <Toolbar />
             <Divider />
-            <Link style={{ textDecoration: "none" }} className='d-block hover' to={`${url}/myOrders`}>
-                My Orders
+            <Link style={{ textDecoration: "none" }} className='d-block py-2 px-4 text-black hover-grey' to='/'>
+                Home
             </Link>
-            <Link style={{ textDecoration: "none" }} className='d-block' to={`${url}/pay`}>
-                Pay
-            </Link>
-            <Link style={{ textDecoration: "none" }} className='d-block' to={`${url}/review`}>
-                Review
-            </Link>
-            <Link style={{ textDecoration: "none" }} to='/login' onClick={logout} className='d-block'>
-                Logout
-            </Link>
+            {!admin &&
+                <Box >
+                    <Link style={{ textDecoration: "none" }} className='d-block py-2 px-4 text-black hover-grey' to={`${url}/myOrders`}>
+                        My Orders
+                    </Link>
+                    <Link style={{ textDecoration: "none" }} className='d-block py-2 px-4 text-black hover-grey' to={`${url}/pay`}>
+                        Pay
+                    </Link>
+                    <Link style={{ textDecoration: "none" }} className='d-block py-2 px-4 text-black hover-grey' to={`${url}/review`}>
+                        Review
+                    </Link>
+                    <Link style={{ textDecoration: "none" }} to='/login' className='d-block py-2 px-4 text-black hover-grey' onClick={logout}>
+                        Logout
+                    </Link>
+                </Box>
+            }
 
             {
                 admin &&
                 <Box>
-                    <Link className='d-block' to={`${url}/makeAdmin`}>
-                        <Button className='d-flex justify-content-center' >Make Admin</Button>
+                    <Link style={{ textDecoration: "none" }} to='/login' className='d-block py-2 px-4 text-black hover-grey' to={`${url}/makeAdmin`}>
+                        Make Admin
                     </Link>
-                    <Link className='d-block' to={`${url}/manageAllOrders`}>
-                        <Button className='d-flex justify-content-center' >Manage All Orders</Button>
+                    <Link style={{ textDecoration: "none" }} to='/login' className='d-block py-2 px-4 text-black hover-grey' to={`${url}/manageAllOrders`}>
+                        Manage All Orders
                     </Link>
-                    <Link className='d-block' to={`${url}/addAProducts`}>
-                        <Button className='d-flex justify-content-center' > Add A Product</Button>
+                    <Link style={{ textDecoration: "none" }} to='/login' className='d-block py-2 px-4 text-black hover-grey' to={`${url}/addAProducts`}>
+                        Add A Product
                     </Link>
-                    <Link className='d-block' to={`${url}/manageProducts`}>
-                        <Button className='d-flex justify-content-center' >Manage Products</Button>
+                    <Link style={{ textDecoration: "none" }} to='/login' className='d-block py-2 px-4 text-black hover-grey' to={`${url}/manageProducts`}>
+                        Manage Products
                     </Link>
                 </Box>
             }

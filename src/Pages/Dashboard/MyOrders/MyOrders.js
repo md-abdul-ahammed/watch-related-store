@@ -31,14 +31,37 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const MyOrders = () => {
-    const [product, setProduct] = useState([]);
+    const [products, setProducts] = useState([]);
     const { user } = useAuth();
+    const [isDeleted, setIsDeleted] = useState(null)
 
     useEffect(() => {
         fetch(`http://localhost:5000/orders/${user.email}`)
             .then(res => res.json())
-            .then(data => setProduct(data))
-    }, [product, user])
+            .then(data => setProducts(data))
+    }, [products, isDeleted]);
+
+    const handleDelete = (id) => {
+        console.log(id)
+        const confirm = window.confirm("Are you Sure For Delete?")
+        if (confirm) {
+            fetch(`http://localhost:5000/deleteOrder/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.deletedCount) {
+                        setIsDeleted(true)
+                    } else {
+                        setIsDeleted(false)
+                    }
+                })
+        }
+
+    }
 
 
 
@@ -50,23 +73,25 @@ const MyOrders = () => {
                     <Table aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell >Calories</StyledTableCell>
-                                <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                                <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                                <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                                <StyledTableCell >Product Images</StyledTableCell>
+                                <StyledTableCell align="right">Product Name</StyledTableCell>
+                                <StyledTableCell align="right">Product Price</StyledTableCell>
+                                <StyledTableCell align="right">Product Statues</StyledTableCell>
+                                <StyledTableCell align="right">Order</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {product.map((row) => (
-                                <StyledTableRow key={row.name}>
+                            {products.map((data) => (
+                                <StyledTableRow key={data.name}>
                                     <StyledTableCell component="th" scope="row" >
-                                        <img style={{ height: '80px' }} src={row.img} alt="" />
+                                        <img style={{ height: '80px' }} src={data.product?.img} alt="" />
                                     </StyledTableCell>
                                     <StyledTableCell align="right">
-                                        {row.product_name}
+                                        {data.product?.product_name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                                    <StyledTableCell align="right">${data.product?.sell_price}</StyledTableCell>
+                                    <StyledTableCell className='text-danger fw-bold' align="right">{data?.status}</StyledTableCell>
+                                    <StyledTableCell align="right"><button onClick={() => handleDelete(data._id)} className='button-design'>Cancel</button></StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>
