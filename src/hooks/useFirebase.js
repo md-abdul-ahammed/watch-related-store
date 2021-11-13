@@ -87,7 +87,7 @@ const useFirebase = () => {
     //Figure out admin validation;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://sheltered-brushlands-89706.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user.email])
@@ -141,7 +141,7 @@ const useFirebase = () => {
     //send user information in database
     const saveUser = (email, displayName, method) => {
         const user = { email, displayName }
-        fetch('http://localhost:5000/users', {
+        fetch('https://sheltered-brushlands-89706.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'

@@ -43,7 +43,7 @@ const ManageAllOrders = () => {
     // update status
     const onSubmit = (data) => {
         console.log(data)
-        fetch(`http://localhost:5000/updateStatus/${id}`, {
+        fetch(`https://sheltered-brushlands-89706.herokuapp.com/updateStatus/${id}`, {
             method: 'PUT',
             headers: {
                 "content-type": 'application/json'
@@ -74,7 +74,7 @@ const ManageAllOrders = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/order')
+        fetch('https://sheltered-brushlands-89706.herokuapp.com/order')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [products, isDeleted, user.email]);
@@ -82,7 +82,7 @@ const ManageAllOrders = () => {
         console.log(id)
         const confirm = window.confirm("Are you Sure For Delete?")
         if (confirm) {
-            fetch(`http://localhost:5000/deleteOrder/${id}`, {
+            fetch(`https://sheltered-brushlands-89706.herokuapp.com/deleteOrder/${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"

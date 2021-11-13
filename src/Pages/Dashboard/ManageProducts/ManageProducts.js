@@ -34,7 +34,7 @@ const ManageProducts = () => {
     const [isDeleted, setIsDeleted] = useState(null)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products`)
+        fetch(`https://sheltered-brushlands-89706.herokuapp.com/products`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [isDeleted]);
@@ -43,7 +43,7 @@ const ManageProducts = () => {
         console.log(id)
         const confirm = window.confirm("Are you Sure For Delete?")
         if (confirm) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://sheltered-brushlands-89706.herokuapp.com/products/${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"

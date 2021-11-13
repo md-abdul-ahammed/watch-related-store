@@ -36,7 +36,7 @@ const MyOrders = () => {
     const [isDeleted, setIsDeleted] = useState(null)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`https://sheltered-brushlands-89706.herokuapp.com/orders/${user.email}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [products, isDeleted]);
@@ -45,7 +45,7 @@ const MyOrders = () => {
         console.log(id)
         const confirm = window.confirm("Are you Sure For Delete?")
         if (confirm) {
-            fetch(`http://localhost:5000/deleteOrder/${id}`, {
+            fetch(`https://sheltered-brushlands-89706.herokuapp.com/deleteOrder/${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"

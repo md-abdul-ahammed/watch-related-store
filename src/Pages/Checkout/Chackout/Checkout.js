@@ -17,7 +17,7 @@ const Checkout = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/checkout/${id}`)
+        fetch(`https://sheltered-brushlands-89706.herokuapp.com/checkout/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, []);

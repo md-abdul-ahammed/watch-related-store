@@ -29,7 +29,7 @@ const CheckoutModal = ({ openCheckout, handleCheckoutClose, product }) => {
         data.email = user.email;
         data.product = product;
         data.status = "pending";
-        fetch('http://localhost:5000/order', {
+        fetch('https://sheltered-brushlands-89706.herokuapp.com/order', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
