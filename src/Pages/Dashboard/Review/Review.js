@@ -17,8 +17,6 @@ const Review = () => {
         data.name = user.displayName;
         data.img = user.photoURL;
 
-        const all = data
-
         fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
@@ -26,7 +24,6 @@ const Review = () => {
             },
             body: JSON.stringify(data)
         })
-        console.log(all)
     };
 
 

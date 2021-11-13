@@ -24,7 +24,7 @@ const useFirebase = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setAuthError("")
-                const newUser = { email, displayName: name }
+                const newUser = { email, displayName: name, photoURL: "https://i.ibb.co/10GRhV8/240-F-358907879-Vdu96g-F4-XVhj-CZx-N2k-CG0-THTs-SQi8-Ih-T.jpg" }
                 setUser(newUser);
 
                 //send user details in database
@@ -33,7 +33,7 @@ const useFirebase = () => {
 
                 // send name to firebase after creation
                 updateProfile(auth.currentUser, {
-                    displayName: name
+                    displayName: name, photoURL: "https://i.ibb.co/10GRhV8/240-F-358907879-Vdu96g-F4-XVhj-CZx-N2k-CG0-THTs-SQi8-Ih-T.jpg"
                 }).then(() => {
 
                 }).catch((error) => {
