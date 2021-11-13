@@ -78,8 +78,8 @@ const Login = () => {
                                 <small style={{ width: '80%' }} className='d-flex mx-auto'>Are you new member? Please,  <NavLink className='ms-2 fw-bold' to='/register'> Register</NavLink></small>
                             </form>}
                             {/* spinner loading add here */}
-                            {loading && <div style={{ width: "70px", height: '70px' }} class="spinner-border d-flex mx-auto text-secondary" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            {loading && <div style={{ width: "70px", height: '70px' }} className="spinner-border d-flex mx-auto text-secondary" role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>}
                             <div className='d-flex justify-content-center fw-bold my-2'>------------------------Or------------------------</div>
                             <div className='d-flex justify-content-around py-2'>

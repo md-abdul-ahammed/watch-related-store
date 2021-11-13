@@ -18,10 +18,12 @@ const useFirebase = () => {
 
     //for new registration -----------------------
     const registerUser = (email, password, location, history, name) => {
+        setAuthError("")
         setLoading(true);
+
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-
+                setAuthError("")
                 const newUser = { email, displayName: name }
                 setUser(newUser);
 
@@ -42,11 +44,11 @@ const useFirebase = () => {
                 setTimeout(function () {
                     history.replace(destination)
                 }, 1000);
-                setAuthError("")
+
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                if (errorMessage == 'Firebase: Error (auth/email-already-in-use).') {
+                if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
                     setAuthError('This email already in use')
                 } else {
                     setAuthError(errorMessage)
@@ -62,18 +64,18 @@ const useFirebase = () => {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                setAuthError("")
                 const destination = location?.state?.from || '/';
                 setTimeout(function () {
                     history.replace(destination)
                 }, 1000);
-                setAuthError("")
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                if (errorMessage == 'Firebase: Error (auth/user-not-found).') {
+                if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
                     setAuthError("The email that you've entered is incorrect.")
                 }
-                else if (errorMessage == 'Firebase: Error (auth/wrong-password).') {
+                else if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
                     setAuthError("The password that you've entered is incorrect.")
                 }
                 else {
