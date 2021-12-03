@@ -2,7 +2,6 @@
 
 Watch store [**Live Site Link**](https://ahammed-watch-store.netlify.app/). && [**Server Site Link**](https://github.com/md-abdul-ahammed/watch-related-server-side).
 
-Watch store [**Server Site Link**](https://github.com/md-abdul-ahammed/watch-related-server-side).
 
 ## Telling about this project:
 * This site made for **Selling niche-products**.
